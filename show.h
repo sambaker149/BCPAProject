@@ -93,12 +93,14 @@ string show::selectTime()
 		cout << "Please Enter a Valid Menu Choice Number: ";
 		cin.get(ch);
 	}
-	if (ch == '1')
+
+	switch (ch)
 	{
-		showTime = "11:00";
+	case '1': showTime = "11:00";
+		break;
+	case '2': showTime = "18:00";
+		break;
 	}
-	if (ch)
-	{
-		showTime = "18:00";
-	}
+
+	cin.get(terminator);
 }

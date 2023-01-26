@@ -11,7 +11,6 @@ class customer
 public:
 	customer();
 	~customer();
-	void getLogin();
 	void getProfileInfo(string& fName, string& sName, string& address);
 	void getPaymentInfo(int& cardNo, int& cvvNo, int& expMonth, int& expYear);
 protected:
@@ -35,36 +34,6 @@ customer::customer()
 // Destructor
 customer::~customer()
 {
-}
-
-// Enter customer login
-void customer::getLogin()
-{
-	string username; // Usernames would be stored in a database file in a real system
-	string password; // Any username/password accepted in this example
-
-	cout << "================ Welcome to the BCPA ticket purchasing system ================" << endl;
-	cout << "================================ Please log in ===============================" << endl;
-
-	cout << "Enter username:";
-	getline(cin, username);
-
-	while (username.length() > 10)
-	{
-		cout << "Your username should be no longer than 10 characters long." << endl;
-		cout << "Please re-enter your username: ";
-		getline(cin, username);
-	}
-
-	cout << "Enter password";
-	getline(cin, password);
-
-	while (password.length() > 10)
-	{
-		cout << "Your password should be no longer than 10 characters long." << endl;
-		cout << "Please re-enter your password: ";
-		getline(cin, password);
-	}
 }
 
 // Enter customer profile information

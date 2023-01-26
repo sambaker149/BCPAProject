@@ -15,15 +15,13 @@ public:
 	void getLogin();
 	void getName(string& fName, string& sName);
 protected:
-	char ch;
-	string fName;
-	string sName;
+	char ch,
+		terminator;
 };
 
 person::person()
 {
-	fName = "";
-	sName = "";
+
 }
 
 person::~person()
@@ -35,7 +33,7 @@ void person::getUserType(string& type)
 {
 	system("CLS");
 
-	cout << "\n~~~~~~~~~~~~~~~~~~~~ MAIN MENU ~~~~~~~~~~~~~~~~~~~~\n" <<
+	cout << "\n~~~~~~~~~~~~~~~~~ SELECT USER TYPE ~~~~~~~~~~~~~~~~\n" <<
 		endl;
 
 	cout << "1. Customer Login" << endl;
@@ -51,14 +49,15 @@ void person::getUserType(string& type)
 		cin.get(ch);
 	}
 
-	if (ch == '1')
+	switch (ch)
 	{
-		type = "Customer";
+	case '1': type = "Customer";
+		break;
+	case '2': type = "Manager";
+		break;
 	}
-	else if (ch == '2')
-	{
-		type = "Manager";
-	}
+
+	cin.get(terminator);
 }
 
 void person::getLogin()
@@ -87,36 +86,5 @@ void person::getLogin()
 		cout << "Your password should be no longer than 10 characters long." << endl;
 		cout << "Please re-enter your password: ";
 		getline(cin, password);
-	}
-}
-
-void person::getName(string& fName, string& sName)
-{
-	{
-		cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~ ENTER PROFILE INFORMATION ~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-
-		char terminator;
-
-		cout << "Enter First Name: " << endl;
-		getline(cin, fName);
-
-		while (fName.length() > 25)
-		{
-			cout << "Your first name should be no more than 25 characters long." << endl;
-			cout << "Please re-enter your first name: ";
-			getline(cin, fName);
-		}
-
-		cout << "Enter Surname: " << endl;
-		getline(cin, sName);
-
-		while (fName.length() > 25)
-		{
-			cout << "Your surname should be no more than 25 characters long." << endl;
-			cout << "Please re-enter your first name: ";
-			getline(cin, sName);
-		}
-
-		cin.get(terminator);
 	}
 }

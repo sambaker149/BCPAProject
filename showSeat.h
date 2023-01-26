@@ -12,11 +12,11 @@ public:
 	~showSeat();
 	void initialiseFloorPlan();
 	int getNumSeats();
-	double getSeatSelection();
+	double getSeatSelection(int r, int c);
+	void calculateDiscount(double& price);
 private:
 	void displayFloorPlan(int r, int c);
-	void selectTicketType(string type);
-	void calculatePrice(double &price); // Only accessed by class showSeat
+	void calculatePrice(int r, int c, double &price); // Only accessed by class showSeat
 protected:
 	string type;
 	char floorPlan[7][6];
@@ -72,9 +72,29 @@ int showSeat::getNumSeats()
 	return numSeats;
 }
 
-double showSeat::getSeatSelection()
+double showSeat::getSeatSelection(int r, int c)
 {
+	cout << "Enter Row Number: " << endl;
+	cin >> r;
 
+	while (sizeof(r) > 7)
+	{
+		cout << "There are only 7 rows." << endl;
+		cout << "Please enter a valid row number: ";
+		cin >> r;
+	}
+
+	cout << "Enter Column Number: " << endl;
+	cin >> r;
+
+	while (sizeof(c) > 6)
+	{
+		cout << "There are only 6 columns." << endl;
+		cout << "Please enter a valid column number: ";
+		cin >> c;
+	}
+
+	cin.get(terminator);
 }
 
 void showSeat::displayFloorPlan(int r, int c)
@@ -82,57 +102,24 @@ void showSeat::displayFloorPlan(int r, int c)
 
 }
 
-void showSeat::selectTicketType(string type)
+void showSeat::calculatePrice(int r, int c, double& price)
 {
-	cout << "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ SELECT TICKET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" << endl;
+	price = 15;
 
-	cout << "1. Infant" << endl;
-	cout << "2. Child" << endl;
-	cout << "3.Adult" << endl;
-	cout << "4. Senior" << endl;
-	cin.get(ch);
-
-	while (ch != '1' && ch != '2' && ch != '3' && ch != '4')
+	if (r <= 3)
 	{
-		cin.clear();
-		cin.ignore(100, '\n');
-		cout << "Please select a valid menu choice number";
-		cin.get(ch);
+		price = price + 5;
 	}
-
-	switch (ch)
+	else if (r >= 4)
 	{
-	case '1': type = "Infant";
-		break;
-	case '2': type = "Child";
-		break;
-	case '3': type = "Adult";
-		break;
-	case '4': type = "Senior";
-		break;
+		price = price + 2.50;
 	}
-
-	this->type = type;
-
-	cin.get(terminator);
 }
 
-void showSeat::calculatePrice(double& price)
+void showSeat::calculateDiscount(double& price)
 {
-	if (type == "Infant")
+	while (numSeats >= 5)
 	{
-		price = 5.00;
-	}
-	else if (type == "Child")
-	{
-		price = 7.50;
-	}
-	else if (type == "Adult")
-	{
-		price = 15.00;
-	}
-	else if (type == "Senior")
-	{
-		price = 10.00;
+		price = price - (0.25 * price);
 	}
 }
